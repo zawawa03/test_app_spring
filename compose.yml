@@ -23,7 +23,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: password
     volumes:
       - .:/app
-      - gradle_cache:/home/gradle/.gradle
+      - gradle_cache:/root/.gradle
 volumes:
   pgdata:
   gradle_cache:
