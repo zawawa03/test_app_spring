@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      TZ: Asia/Tokyo
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
+      POSTGRES_DB: spring_boot_development
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      TZ: Asia/Tokyo
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/spring_boot_development
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+    volumes:
+      - .:/app
+      - gradle_cache:/home/gradle/.gradle
+volumes:
+  pgdata:
+  gradle_cache:
+
