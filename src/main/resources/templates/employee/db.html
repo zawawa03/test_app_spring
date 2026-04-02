@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+      <meta charset="UTF-8">
+      <title>ResponseSample</title>
+  </head>
+  <body>
+    <h1>ResponseDB</h1>
+    <table>
+        <tr>
+            <td>id</td>
+            <td th:text="${employee.employeeId}"></td>
+        </tr>
+        <tr>
+            <td>name</td>
+            <td th:text="${employee.employeeName}"></td>
+        </tr>
+        <tr>
+            <td>age</td>
+            <td th:text="${employee.employeeAge}"></td>
+        </tr>
+    </table>
+  </body>
+</html>
