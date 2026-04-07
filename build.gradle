@@ -40,6 +40,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.webjars:bootstrap:5.3.8'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:4.0.0'
 }
 
 tasks.named('test') {
