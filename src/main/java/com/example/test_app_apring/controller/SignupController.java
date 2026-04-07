@@ -3,6 +3,7 @@ package com.example.test_app_apring.controller;
 import java.util.Locale;
 import java.util.Map;
 
+import com.example.test_app_apring.form.GroupOrder;
 import com.example.test_app_apring.form.SignupForm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
@@ -33,7 +34,7 @@ public class SignupController {
     }
 
     @PostMapping("/signup")
-    public String postSignup(Model model, Locale locale, @ModelAttribute("signupForm") @Validated SignupForm form, BindingResult bindingResult) {
+    public String postSignup(Model model, Locale locale, @ModelAttribute("signupForm") @Validated(GroupOrder.class) SignupForm form, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
             return getSignup(model, locale, form);
         }
