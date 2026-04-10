@@ -2,6 +2,7 @@ package com.example.test_app_apring.repository;
 
 import com.example.test_app_apring.domain.user.model.MUser;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -12,4 +13,8 @@ public interface UserMapper {
     List<MUser> findMany();
 
     MUser findOne(String userId);
+
+    void updateOne(@Param("userId") String userId, @Param("password") String password, @Param("userName") String username);
+
+    int deleteOne(@Param("userId") String userId);
 }
