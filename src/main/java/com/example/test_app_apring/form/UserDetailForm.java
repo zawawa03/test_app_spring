@@ -1,5 +1,6 @@
 package com.example.test_app_apring.form;
 
+import com.example.test_app_apring.domain.user.model.Department;
 import lombok.Data;
 
 import java.util.Date;
@@ -12,4 +13,5 @@ public class UserDetailForm {
     private Date birthday;
     private Integer age;
     private Integer gender;
+    private Department department;
 }

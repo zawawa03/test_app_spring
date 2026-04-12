@@ -21,7 +21,7 @@ INSERT INTO m_department (department_id,
                           department_name
 )VALUES
      (1, 'システム管理部'),
-     (1, '営業部')
+     (2, '営業部')
 ON CONFLICT (department_id) DO NOTHING;
 
 

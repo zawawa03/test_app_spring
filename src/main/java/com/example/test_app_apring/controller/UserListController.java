@@ -3,9 +3,13 @@ package com.example.test_app_apring.controller;
 
 import com.example.test_app_apring.domain.user.model.MUser;
 import com.example.test_app_apring.domain.user.service.UserService;
+import com.example.test_app_apring.form.UserListForm;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -14,14 +18,25 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserListController {
     private final UserService userService;
+    private final ModelMapper modelMapper;
 
-    public UserListController(UserService userService) {
+    public UserListController(UserService userService, ModelMapper modelMapper) {
         this.userService = userService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping("/list")
-    public String getUserList(Model model){
-        List<MUser> userList = userService.getUsers();
+    public String getUserList(@ModelAttribute UserListForm form, Model model){
+        MUser user = modelMapper.map(form, MUser.class);
+        List<MUser> userList = userService.getUsers(user);
+        model.addAttribute("userList", userList);
+        return "user/list";
+    }
+
+    @PostMapping("/list")
+    public String postUser(@ModelAttribute UserListForm form, Model model){
+        MUser user = modelMapper.map(form, MUser.class);
+        List<MUser> userList = userService.getUsers(user);
         model.addAttribute("userList", userList);
         return "user/list";
     }
