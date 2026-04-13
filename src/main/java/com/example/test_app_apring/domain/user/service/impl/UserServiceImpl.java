@@ -3,7 +3,9 @@ package com.example.test_app_apring.domain.user.service.impl;
 import com.example.test_app_apring.domain.user.model.MUser;
 import com.example.test_app_apring.domain.user.service.UserService;
 import com.example.test_app_apring.repository.UserMapper;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class UserServiceImpl implements UserService {
         return mapper.findOne(userId);
     }
 
+    @Transactional
     @Override
     public void updateUserOne(String userId, String password, String userName) {
         mapper.updateOne(userId, password, userName);

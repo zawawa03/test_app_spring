@@ -3,6 +3,7 @@ package com.example.test_app_apring.controller;
 import com.example.test_app_apring.domain.user.model.MUser;
 import com.example.test_app_apring.domain.user.service.UserService;
 import com.example.test_app_apring.form.UserDetailForm;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("user")
+@Slf4j
 public class UserDetailController {
     private final UserService userService;
     private final ModelMapper modelMapper;
@@ -37,7 +39,12 @@ public class UserDetailController {
 
     @PostMapping(value="/detail", params="update")
     public String updateUser(UserDetailForm form, Model model) {
-        userService.updateUserOne(form.getUserId(), form.getPassword(), form.getUserName());
+
+        try {
+            userService.updateUserOne(form.getUserId(), form.getPassword(), form.getUserName());
+        } catch (Exception e) {
+            log.error("ユーザー更新でエラー" ,e);
+        }
 
         return "redirect:/user/list";
     }
