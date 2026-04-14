@@ -9,15 +9,14 @@ import com.example.test_app_apring.form.GroupOrder;
 import com.example.test_app_apring.form.SignupForm;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import com.example.test_app_apring.sevice.UserApplicationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/user")
@@ -56,5 +55,24 @@ public class SignupController {
         userService.signup(user);
 
         return "redirect:/login";
+    }
+
+    /** 例外処理 */
+    @ExceptionHandler(DataAccessException.class)
+    public String dataAccessExceptionHandler(DataAccessException e, Model model) {
+        model.addAttribute("error", "");
+
+        model.addAttribute("message", "SignupControllerで例外が発生しました");
+
+        model.addAttribute("status", HttpStatus.INTERNAL_SERVER_ERROR);
+        return "error";
+    }
+
+    @ExceptionHandler(Exception.class)
+    public String exceptionHandler(Exception e, Model model) {
+        model.addAttribute("error", "");
+        model.addAttribute("message", "SignupControllerで例外が発生しました");
+        model.addAttribute("status", HttpStatus.INTERNAL_SERVER_ERROR);
+        return "error";
     }
 }
