@@ -5,6 +5,9 @@
 <head>
     <title>ユーザー詳細</title>
     <link rel="stylesheet" th:href="@{/css/user/list.css}">
+    <!-- JS読み込み -->
+    <script th:src="@{/js/user/detail.js}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
   <div layout:fragment="content">
@@ -55,6 +58,14 @@
               </button>
               <button type="submit" class="btn btn-success" name="update">
                   更新
+              </button>
+          </div>
+          <div class="text-center mt-3">
+              <button id="btn-delete" class="btn btn-danger" type="button">
+                  削除（REST）
+              </button>
+              <button id="btn-update" class="btn btn-primary" type="button">
+                  更新（REST）
               </button>
           </div>
           <th:block th:if="*{salaryList != null and salaryList.size() > 0}">
